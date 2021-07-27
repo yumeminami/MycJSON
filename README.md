@@ -83,7 +83,7 @@ extern char *cJSON_PrintBuffered(cJSON *item,int prebuffer,int fmt);
 extern void   cJSON_Delete(cJSON *c);
 ```
 
-6.定义一些关于*Array*与*Object*的函数
+6.定义一些关于*Array*与*Object*的函数,以下只简单罗列，若有需求则到cJSON.h查找
 
 ```C++
 /* 返回数组(或对象)中的项数。 */
@@ -97,50 +97,6 @@ extern cJSON *cJSON_GetObjectItem(cJSON *object,const char *string);
 你可能需要回头看几个字才能理解它。当cJSON_Parse()返回0时定义。当cJSON_Parse()成功时为0。 */
 extern const char *cJSON_GetErrorPtr(void);
 
-/* 这些调用创建适当Type的cJSON项。 */
-extern cJSON *cJSON_CreateNull(void);
-extern cJSON *cJSON_CreateTrue(void);
-extern cJSON *cJSON_CreateFalse(void);
-extern cJSON *cJSON_CreateBool(int b);
-extern cJSON *cJSON_CreateNumber(double num);
-extern cJSON *cJSON_CreateString(const char *string);
-extern cJSON *cJSON_CreateArray(void);
-extern cJSON *cJSON_CreateObject(void);
- 
-/* 根据count创建数组。 */
-extern cJSON *cJSON_CreateIntArray(const int *numbers,int count);
-extern cJSON *cJSON_CreateFloatArray(const float *numbers,int count);
-extern cJSON *cJSON_CreateDoubleArray(const double *numbers,int count);
-extern cJSON *cJSON_CreateStringArray(const char **strings,int count);
- 
-/* 向指定的数组/对象追加项。 */
-extern void cJSON_AddItemToArray(cJSON *array, cJSON *item);
-extern void	cJSON_AddItemToObject(cJSON *object,const char *string,cJSON *item);
-extern void	cJSON_AddItemToObjectCS(cJSON *object,const char *string,cJSON *item);	/* 当字符串确实是常量(例如，是一个文本，或者与常量一样好)，并且肯定会在cJSON对象中存活时，就使用这个方法 */
-/* 将对项的引用追加到指定的数组/对象。当您想要将现有的cJSON添加到新的cJSON中，但又不想破坏现有的cJSON时，可以使用此方法。 */
-extern void cJSON_AddItemReferenceToArray(cJSON *array, cJSON *item);
-extern void	cJSON_AddItemReferenceToObject(cJSON *object,const char *string,cJSON *item);
- 
-/* 从数组/对象中删除/分离项。 */
-extern cJSON *cJSON_DetachItemFromArray(cJSON *array,int which);
-extern void   cJSON_DeleteItemFromArray(cJSON *array,int which);
-extern cJSON *cJSON_DetachItemFromObject(cJSON *object,const char *string);
-extern void   cJSON_DeleteItemFromObject(cJSON *object,const char *string);
-	
-/* 更新数组项 */
-extern void cJSON_InsertItemInArray(cJSON *array,int which,cJSON *newitem);	/* 将已存在的项目向右移动。 */
-extern void cJSON_ReplaceItemInArray(cJSON *array,int which,cJSON *newitem);
-extern void cJSON_ReplaceItemInObject(cJSON *object,const char *string,cJSON *newitem);
- 
-/* 复制一个cJSON项目 */
-extern cJSON *cJSON_Duplicate(cJSON *item,int recurse);
-/* Duplicate将在需要释放的新内存中创建一个与传递的cJSON相同的新项目。
-递归!=0，它将复制连接到该项的所有子元素。条目->next和->prev指针在从Duplicate返回时总是0。*/
- 
-/* ParseWithOpts允许您要求(并检查)JSON是否以null结尾，并检索指向解析后的最终字节的指针。 */
-extern cJSON *cJSON_ParseWithOpts(const char *value,const char **return_parse_end,int require_null_terminated);
- 
-extern void cJSON_Minify(char *json);
 ```
 
 7.最后定义宏
