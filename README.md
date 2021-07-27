@@ -71,7 +71,7 @@ extern void cJSON_InitHooks(cJSON_Hooks* hooks);
 5.定义*cJSON_Parse()*解析和*cJSON_Print()*打印
 
 ```C++
-* 提供一个JSON块，然后返回一个可以查询的cJSON对象。完成后调用cJSON_Delete。 */
+/* 提供一个JSON块，然后返回一个可以查询的cJSON对象。完成后调用cJSON_Delete。 */
 extern cJSON *cJSON_Parse(const char *value);
 /* 将cJSON实体呈现为用于传输/存储的文本。完成后释放char*。 */
 extern char  *cJSON_Print(cJSON *item);
